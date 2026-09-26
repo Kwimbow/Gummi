@@ -3,8 +3,8 @@ using UnityEngine;
 public class XToX : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float speed;
-    [SerializeField] private float distance;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float distance = 4f;
     
     [Header("Direction Settings")]
     [SerializeField] private Vector3 moveDirection; 

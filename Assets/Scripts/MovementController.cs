@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     [SerializeField] 
-    private float moveSpeed = 10f;
+    private float moveSpeed = 5f;
 
     void Start()
     {

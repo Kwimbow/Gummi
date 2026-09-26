@@ -4,12 +4,12 @@ public class UpAndDown : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] 
-    private float speed;
+    private float speed = 0.2f;
 
     [SerializeField] 
-    private float minY;
+    private float minY = 0.7246015f;
     [SerializeField] 
-    private float maxY;
+    private float maxY = 9f;
 
     void Update()
     {
