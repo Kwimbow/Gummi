@@ -3871,13 +3871,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33963993, y: -0.028245697, z: 0.010204885, w: 0.94007593}
-  m_LocalPosition: {x: 25.89, y: 21.46, z: -18.93}
+  m_LocalRotation: {x: 0.3637892, y: -0.112978265, z: 0.044503316, w: 0.9235328}
+  m_LocalPosition: {x: 32.51, y: 29.82, z: -18.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 39.729, y: -3.442, z: 0}
+  m_LocalEulerAnglesHint: {x: 43, y: -13.949, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9173,6 +9173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc7b21701fb54b07a2053c7a37bee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementController
+  jumpspeed: 10
   moveSpeed: 5
 --- !u!114 &1667921253
 MonoBehaviour:
