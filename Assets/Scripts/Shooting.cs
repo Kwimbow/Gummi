@@ -52,24 +52,19 @@ public class BallShooter : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-
-        // Perform Raycast targeting with LayerMask applied
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         Vector3 targetPoint = Physics.Raycast(ray, out hit, 100f, shootableLayerMask) ? hit.point : ray.GetPoint(75f);
 
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
 
-        // Apply spread
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
-        // Instantiate ball
         GameObject currentBall = Instantiate(ballPrefab, attackPoint.position, Quaternion.identity);
         currentBall.transform.forward = directionWithSpread.normalized;
 
-        // Ignore collision between spawned ball and player/gun
         Collider ballCollider = currentBall.GetComponent<Collider>();
         Collider playerCollider = GetComponentInParent<Collider>();
         if (ballCollider != null && playerCollider != null)
@@ -77,7 +72,6 @@ public class BallShooter : MonoBehaviour
             Physics.IgnoreCollision(ballCollider, playerCollider);
         }
 
-        // Apply combined force vector directly toward target
         Rigidbody rb = currentBall.GetComponent<Rigidbody>();
         if (rb != null)
         {
