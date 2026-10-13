@@ -5,6 +5,8 @@ public class tp1 : MonoBehaviour
     [SerializeField] private GameObject player;
     void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
         CharacterController cc = player.GetComponent<CharacterController>();
             if (cc != null)
             {
@@ -16,5 +18,6 @@ public class tp1 : MonoBehaviour
             {
                 player.transform.position = new Vector3(-20.4f, 0f, 36.6f);
             }
+        }
     }
 }
