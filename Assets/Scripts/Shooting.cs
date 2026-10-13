@@ -22,9 +22,6 @@ public class BallShooter : MonoBehaviour
     public float timeBetweenShooting = 0.25f;
     private bool readyToShoot = true;
 
-    [Header("UI & FX")]
-    public TextMeshProUGUI ammunitionDisplay;
-
     private int shootableLayerMask;
 
     private void Awake()
@@ -36,7 +33,6 @@ public class BallShooter : MonoBehaviour
     private void Update()
     {
         MyInput();
-        UpdateUI();
     }
 
     private void MyInput()
@@ -87,13 +83,5 @@ public class BallShooter : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
-    }
-
-    private void UpdateUI()
-    {
-        if (ammunitionDisplay != null)
-        {
-            ammunitionDisplay.SetText($"Balls: {ballsRemaining} / {maxBalls}");
-        }
     }
 }
