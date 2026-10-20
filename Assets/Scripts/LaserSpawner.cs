@@ -3,27 +3,38 @@ using System.Collections;
 
 public class LaserSpawner : MonoBehaviour
 {
+    public static LaserSpawner Instance;
+
     public GameObject laser;
-    public bool isSpawning = false;
+    private int detectorsActiveCount;
+    private Transform playerTarget;
 
     [Header("Spawn Interval Settings")]
     [SerializeField] private float minSpawnTime = 0.5f;
     [SerializeField] private float maxSpawnTime = 2f;
     private Coroutine spawnCoroutine;
 
-    public void StartSpawning()
+    void Awake()
     {
-        if (!isSpawning)
+        Instance = this;
+    }
+
+    public void StartSpawning(Transform target)
+    {
+        playerTarget = target;
+        detectorsActiveCount++;
+
+        if (spawnCoroutine == null)
         {
-            isSpawning = true;
             spawnCoroutine = StartCoroutine(SpawnRoutine());
         }
     }
 
     public void StopSpawning()
     {
-        isSpawning = false;
-        if (spawnCoroutine != null)
+        detectorsActiveCount = Mathf.Max(0, detectorsActiveCount - 1);
+
+        if (detectorsActiveCount == 0 && spawnCoroutine != null)
         {
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
@@ -32,28 +43,41 @@ public class LaserSpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (isSpawning)
+        while (detectorsActiveCount > 0)
         {
             float randomDelay = Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(randomDelay);
-
-            SpawnLaser();
+            if (detectorsActiveCount > 0)
+            {
+                SpawnLaser();
+            }
         }
+        spawnCoroutine = null;
     }
 
     public void SpawnLaser()
     {
+        if (laser == null) return;
+        if (playerTarget == null)
+        {
+            Debug.LogWarning("Cannot spawn a laser because no player target is set.", this);
+            return;
+        }
+
         float spawnPointY = Random.Range(0.6f, 4f);
         float spawnPointZ = 36f;
         Vector3 spawnPosition = new Vector3(transform.position.x, spawnPointY, spawnPointZ);
 
         GameObject newLaser = Instantiate(laser, spawnPosition, transform.rotation);
-
         MoveToStart moveScript = newLaser.GetComponent<MoveToStart>();
 
         if (moveScript != null)
         {
-            moveScript.StartLaser();
+            moveScript.StartLaser(playerTarget);
+        }
+        else
+        {
+            Debug.LogWarning("The assigned laser prefab has no MoveToStart component.", laser);
         }
     }
 }

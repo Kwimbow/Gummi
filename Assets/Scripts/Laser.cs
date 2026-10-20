@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
             
             if (!timer.isWinner)
             {
-                health.TakeDamage(2f);
+                health.TakeDamage(5f);
                 Destroy(gameObject);
             }
         }

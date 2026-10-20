@@ -18,11 +18,10 @@ public class MoveToStart : MonoBehaviour
         }
     }
 
-    public void StartLaser()
+    public void StartLaser(Transform targetTransform)
     {
         RandomizeZRotation();
-        isLaserMoving = true;
-    }
+        isLaserMoving = true;}
 
     public void RandomizeZRotation()
     {

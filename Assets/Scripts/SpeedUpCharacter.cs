@@ -21,7 +21,7 @@ public class SpeedUpCharacter : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isCollected)
         {
-            var playerController = other.GetComponentInParent<StarterAssets.ThirdPersonController>();
+            var playerController = other.GetComponentInParent<StarterAssets.FirstPersonController>();
             Timer timer = FindAnyObjectByType<Timer>();
             
             if (!timer.isWinner)
@@ -43,7 +43,7 @@ public class SpeedUpCharacter : MonoBehaviour
         }
     }
 
-    private IEnumerator ApplySpeedBoost(StarterAssets.ThirdPersonController player)
+    private IEnumerator ApplySpeedBoost(StarterAssets.FirstPersonController player)
     {
         float originalSpeed = player.MoveSpeed;
         float originalSprintSpeed = player.SprintSpeed;
